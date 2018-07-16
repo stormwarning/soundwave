@@ -3,14 +3,23 @@ import Helper from 'hubot-test-helper'
 
 const helper = new Helper('../scripts/soundwave.js')
 
-test.beforeEach(() => {
-    return (this.room = helper.createRoom())
+test.beforeEach(t => {
+    t.context = {
+        room: helper.createRoom(),
+    }
 })
 
-test.afterEach(() => {
-    return this.room.destroy()
+test.afterEach(t => {
+    t.context.room.destroy()
 })
 
-test('soundwave script', t => {
-    t.pass()
+test('soundwave script', async t => {
+    return t.context.room.user
+        .say('alice', '@soundwave status')
+        .then(
+            t.is(await t.context.room.messages, [
+                ['alice', '@soundwave status'],
+                ['soundwave', 'my status'],
+            ])
+        )
 })
