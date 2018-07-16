@@ -28,5 +28,8 @@
   },
   "engines": {
     "node": "8.x"
+  },
+  "scripts": {
+    "test": "ava"
   }
 }
