@@ -13,13 +13,17 @@ module.exports = function (robot) {
     })
 
     robot.respond(/standup time/i, function (msg) {
-        speaker
+        return speaker
             .play(PLAYLIST)
             .then((result) => {
+                const nowPlaying = speaker.currentTrack()
+
                 _log('Started playing', result)
+                msg.reply(`Now playing ${JSON.stringify(nowPlaying)}`)
             })
             .catch((error) => {
                 _log('An error occurred:', error)
+                msg.reply('Sorry, I just can\t even')
             })
     })
 }
