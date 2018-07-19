@@ -4,8 +4,11 @@
   "description": "Soundwave: superior. Slackbot: inferior.",
   "author": "Jeff <rustyangel@gmail.com>",
   "version": "0.0.0",
+  "scripts": {
+    "test": "HUBOT_SONOS_HOST=192.168.86.74 ava"
+  },
   "dependencies": {
-    "hubot": "^2.19.0",
+    "hubot": "^3.0.0",
     "hubot-diagnostics": "0.0.2",
     "hubot-google-images": "^0.2.7",
     "hubot-google-translate": "^0.2.1",
@@ -23,13 +26,12 @@
   "devDependencies": {
     "@zazen/eslint-config": "^0.2.0",
     "ava": "1.0.0-beta.6",
+    "coffee-script": "^1.12.7",
     "eslint": "^5.1.0",
+    "hubot-mock-adapter-v3": "^1.0.1",
     "hubot-test-helper": "^1.9.0"
   },
   "engines": {
     "node": "8.x"
-  },
-  "scripts": {
-    "test": "ava"
   }
 }
