@@ -1,5 +1,13 @@
-const Sonos = require('sonos').Sonos
-const speaker = new Sonos(process.env.HUBOT_SONOS_HOST)
+const { Sonos } = require('sonos')
+const speaker = new Sonos(
+    process.env.HUBOT_SONOS_HOST || '192.168.86.74',
+    1400,
+    {
+        spotify: {
+            region: 'CA',
+        },
+    },
+)
 
 const PLAYLIST = 'spotify:user:rustyangel:playlist:30Lf4GhZN8VIvyvcCFR2BY'
 
@@ -9,7 +17,19 @@ function _log (...args) {
 
 module.exports = function (robot) {
     robot.respond(/status/i, function (msg) {
-        return msg.reply(`${JSON.stringify(speaker.getSpotifyConnectInfo())}`)
+        function statusMessage () {
+            speaker.getSpotifyConnectInfo().then((info) => {
+                msg.reply(`spotify info: ${JSON.stringify(info)}`)
+            })
+            speaker.deviceDescription().then((info) => {
+                msg.reply(`device info: ${JSON.stringify(info)}`)
+            })
+            speaker.currentTrack().then((track) => {
+                msg.reply(`current track: ${JSON.stringify(track)}`)
+            })
+        }
+
+        return statusMessage()
     })
 
     robot.respond(/standup time/i, function (msg) {
@@ -23,7 +43,7 @@ module.exports = function (robot) {
             })
             .catch((error) => {
                 _log('An error occurred:', error)
-                msg.reply('Sorry, I just can\t even')
+                msg.reply('Sorry, I just can’t even')
             })
     })
 }
