@@ -1,3 +1,4 @@
+const timestamp = require('console-timestamp')
 const { Sonos } = require('sonos')
 const speaker = new Sonos(
     process.env.HUBOT_SONOS_HOST || '192.168.86.74',
@@ -12,7 +13,7 @@ const speaker = new Sonos(
 const PLAYLIST = 'spotify:user:rustyangel:playlist:30Lf4GhZN8VIvyvcCFR2BY'
 
 function _log (...args) {
-    console.log('MM-DD hh:mm:ss:iii  '.timestamp, ...args)
+    console.log(timestamp('MM-DD hh:mm:ss:iii  '), ...args)
 }
 
 module.exports = function (robot) {

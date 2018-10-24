@@ -8,6 +8,7 @@
     "test": "HUBOT_SONOS_HOST=192.168.86.74 ava"
   },
   "dependencies": {
+    "console-timestamp": "^0.3.0",
     "hubot": "^3.0.0",
     "hubot-diagnostics": "0.0.2",
     "hubot-google-images": "^0.2.7",
